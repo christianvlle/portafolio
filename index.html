@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christian Valle · Arquitecto y Modelador BIM</title>
+<meta name="description" content="Portafolio de Christian Valle, arquitecto y modelador BIM. Proyectos de arquitectura residencial y cultural, visualización y modelado en Revit.">
+<meta name="author" content="Christian Valle">
+<meta name="theme-color" content="#0C1821">
+<!-- Open Graph (LinkedIn, WhatsApp, Facebook). -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Christian Valle · Portafolio">
+<meta property="og:title" content="Christian Valle · Arquitecto y Modelador BIM">
+<meta property="og:description" content="Portafolio de Christian Valle, arquitecto y modelador BIM. Proyectos de arquitectura residencial y cultural, visualización y modelado en Revit.">
+<meta property="og:url" content="https://christianvlle.github.io/portafolio/">
+<meta property="og:image" content="https://christianvlle.github.io/portafolio/img/portada/vista-previa.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Render de la fachada de una vivienda, del portafolio de Christian Valle">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Christian Valle · Arquitecto y Modelador BIM">
+<meta name="twitter:description" content="Portafolio de Christian Valle, arquitecto y modelador BIM. Proyectos de arquitectura residencial y cultural, visualización y modelado en Revit.">
+<meta name="twitter:image" content="https://christianvlle.github.io/portafolio/img/portada/vista-previa.jpg">
+<link rel="icon" href="img/iconos/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/iconos/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/iconos/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="preload" as="image" href="img/portada/casa-san-diego.webp" fetchpriority="high">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="app"></div>
+<noscript><div style="padding:32px;font-family:Helvetica,Arial,sans-serif;color:#CCC9DC;background:#0C1821">
+<h1>Christian Valle</h1><p>Arquitecto · Modelador BIM — chrisvl23@icloud.com</p>
+<p>Activa JavaScript para ver el portafolio. / Please enable JavaScript to view the portfolio.</p></div></noscript>
+<template id="tpl">
+<div class="page {{ langClass }}" style="width: 100%; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; background: #0C1821; color: #CCC9DC; font-family: 'Space Grotesk', Helvetica, Arial, sans-serif; line-height: 1.5; position: relative; {{ rootLook }}">
+
+<header class="hdr" style="flex: none; display: flex; justify-content: flex-end; align-items: center; height: 44px">
+
+<sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}"><button type="button" class="hdr-back" onclick="{{ back }}" style="margin-right: auto; min-height: 44px; padding: 0 20px; cursor: pointer; background: none; border: 1px solid #CCC9DC; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #CCC9DC; width: 152px; height: 52px; white-space: nowrap"><span class="t-es">← Regresar</span><span class="t-en">← Back</span></button></sc-if>
+<nav class="hdr-nav" style="display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px">
+<button type="button" class="nav-btn" onclick="{{ goBio }}" style="min-height: 44px; padding: 0 20px; cursor: pointer; background: none; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #CCC9DC; width: 152px; height: 52px; white-space: nowrap; {{ navBio }}"><span class="t-es">Acerca de mí</span><span class="t-en">About me</span></button><button type="button" class="nav-btn" onclick="{{ goContents }}" style="min-height: 44px; padding: 0 20px; cursor: pointer; background: none; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #CCC9DC; width: 152px; height: 52px; white-space: nowrap; {{ navContents }}"><span class="t-es">Proyectos</span><span class="t-en">Projects</span></button>
+<button type="button" class="nav-btn" onclick="{{ openContact }}" aria-haspopup="dialog" style="min-height: 44px; padding: 0 20px; cursor: pointer; background: none; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #CCC9DC; width: 152px; height: 52px; white-space: nowrap; {{ navContact }}"><span class="t-es">Contacto</span><span class="t-en">Contact</span></button>
+<div role="group" aria-label="Idioma / Language" style="display: flex; align-items: center; margin-left: 4px">
+<button type="button" class="lang-btn" lang="es" onclick="{{ setEs }}" aria-pressed="{{ isEs }}" style="min-height: 44px; min-width: 44px; padding: 0 10px; cursor: pointer; background: none; border: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; {{ esLook }}">ES</button>
+<span aria-hidden="true" style="color: #324A5F; font-family: 'IBM Plex Mono', monospace">|</span>
+<button type="button" class="lang-btn" lang="en" onclick="{{ setEn }}" aria-pressed="{{ isEn }}" style="min-height: 44px; min-width: 44px; padding: 0 10px; cursor: pointer; background: none; border: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; {{ enLook }}">EN</button>
+</div>
+</nav>
+<button type="button" class="menu-btn" onclick="{{ openMenu }}" aria-label="{{ menuLabel }}" aria-expanded="{{ menuOpen }}" aria-controls="m-menu"><svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M0 1h22M0 8h22M0 15h22" stroke="currentColor" stroke-width="1.6"></path></svg></button>
+</header>
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+<div class="m-menu" id="m-menu" role="dialog" aria-modal="true" aria-label="Menú / Menu">
+<div class="m-menu-top"><button type="button" class="m-close" onclick="{{ closeMenu }}" aria-label="{{ closeLabel }}">&#215;</button></div>
+<nav class="m-nav">
+<button type="button" class="m-link" onclick="{{ mGoBio }}" aria-current="{{ curBio }}"><span class="t-es">Acerca de mí</span><span class="t-en">About me</span></button>
+<button type="button" class="m-link" onclick="{{ mGoContents }}" aria-current="{{ curContents }}"><span class="t-es">Proyectos</span><span class="t-en">Projects</span></button>
+<button type="button" class="m-link" onclick="{{ mContact }}"><span class="t-es">Contacto</span><span class="t-en">Contact</span></button>
+</nav>
+<div class="m-lang" role="group" aria-label="Idioma / Language">
+<button type="button" class="lang-btn" lang="es" onclick="{{ setEs }}" aria-pressed="{{ isEs }}" style="min-height: 44px; min-width: 44px; padding: 0 10px; cursor: pointer; background: none; border: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; {{ esLook }}">ES</button>
+<span aria-hidden="true" style="color: #324A5F; font-size: 18px">|</span>
+<button type="button" class="lang-btn" lang="en" onclick="{{ setEn }}" aria-pressed="{{ isEn }}" style="min-height: 44px; min-width: 44px; padding: 0 10px; cursor: pointer; background: none; border: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; {{ enLook }}">EN</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isBio }}" hint-placeholder-val="{{ true }}">
+<section class="bio-section" style="flex: 1 1 0; min-height: 0; margin-top: clamp(12px, 3vh, 40px); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(24px, 5vw, 72px); animation: fadeIn 0.6s ease both">
+<div class="bio-photo-wrap" style="display: flex; flex-direction: column; gap: 10px; min-height: 0; min-width: 0; max-width: 560px">
+<div class="bio-photo" style="position: relative; flex: 1 1 0; min-height: 0">
+<img src="img/portada/casa-san-diego.webp" srcset="img/portada/casa-san-diego.webp 950w" sizes="(max-width: 820px) 100vw, 40vw" alt="{{ photoAlt }}" fetchpriority="high" style="position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover">
+</div>
+<div style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #9AA3B5"><span class="t-es">Casa San Diego · Render</span><span class="t-en">Casa San Diego · Render</span></div>
+</div>
+<div class="bio-text" style="display: flex; flex-direction: column; justify-content: center; min-width: 0; min-height: 0">
+
+<h1 class="bio-name" style="margin: clamp(6px, 1.4vh, 16px) 0 0; font-size: clamp(36px, min(9.5vh, 5.2vw), 84px); line-height: 1; font-weight: 700; letter-spacing: -0.04em; white-space: nowrap">Christian Valle</h1>
+<div style="margin-top: clamp(6px, 1.2vh, 14px); font-size: clamp(14px, 2.4vh, 22px); color: #9AA3B5"><span class="t-es">Arquitecto · Modelador BIM</span><span class="t-en">Architect · BIM Modeller</span></div>
+<p style="margin: clamp(10px, 2vh, 24px) 0 0; font-size: clamp(13px, 2.1vh, 20px); line-height: 1.45; max-width: 680px"><span class="t-es">Soy Christian Valle, arquitecto y modelador BIM. Creo que cada proyecto empieza con una pregunta sencilla —¿cómo se va a vivir este espacio?— y que el buen diseño consiste en responderla con cuidado, desde el primer boceto hasta el último detalle. Me formé en la Universidad de El Salvador y he trabajado en viviendas de 400 a más de 1,000 m² con ArchitectoSV, donde descubrí cuánto disfruto del modelado BIM.</span><span class="t-en">I'm Christian Valle, an architect and BIM modeller. I believe every project starts with a simple question — how will this space be lived in? — and that good design means answering it with care, from the first sketch to the last detail. I trained at the Universidad de El Salvador and have worked on homes from 400 to over 1,000 m² with ArchitectoSV, where I discovered how much I enjoy BIM modelling.</span></p>
+<p style="margin: clamp(6px, 1.2vh, 12px) 0 0; font-size: clamp(12.5px, 1.8vh, 16px); line-height: 1.45; font-style: italic; max-width: 680px"><span class="t-es">Para mí, la arquitectura está en el equilibrio entre la idea que emociona y la técnica que la hace posible. Este portafolio reúne algunos de los proyectos que me han formado.</span><span class="t-en">To me, architecture lives in the balance between the idea that inspires and the technique that makes it possible. This portfolio brings together some of the projects that have shaped me.</span></p>
+<dl class="bio-dl" style="margin: clamp(10px, 2vh, 24px) 0 0; display: grid; grid-template-columns: max-content 1fr; align-items: baseline; gap: clamp(2px, 0.7vh, 6px) clamp(14px, 2vw, 28px); font-size: clamp(12.5px, 1.9vh, 16px); line-height: 1.35">
+<dt style="font-family: 'IBM Plex Mono', monospace; font-size: clamp(12px, 1.8vh, 15px); color: #B4BDD0"><span class="t-es">Software</span><span class="t-en">Software</span></dt>
+<dd style="margin: 0"><span class="t-es">Revit · AutoCAD · D5 Render · Lumion · Photoshop · Illustrator · Dynamo</span><span class="t-en">Revit · AutoCAD · D5 Render · Lumion · Photoshop&nbsp;</span></dd>
+<dt style="font-family: 'IBM Plex Mono', monospace; font-size: clamp(12px, 1.8vh, 15px); color: #B4BDD0"><span class="t-es">Idiomas</span><span class="t-en">Languages</span></dt>
+<dd style="margin: 0"><span class="t-es">Español (nativo) · Inglés (C1)</span><span class="t-en">Spanish (native) · English (C1)</span></dd>
+<dt style="font-family: 'IBM Plex Mono', monospace; font-size: clamp(12px, 1.8vh, 15px); color: #B4BDD0"><span class="t-es">Reconocimiento</span><span class="t-en">Recognition</span></dt>
+<dd style="margin: 0"><span class="t-es">Mención especial, Bienal de Arquitectura 2024</span><span class="t-en">Special mention, Bienal de Arquitectura 2024</span></dd>
+<dt style="font-family: 'IBM Plex Mono', monospace; font-size: clamp(12px, 1.8vh, 15px); color: #B4BDD0"><span class="t-es">Ubicación</span><span class="t-en">Location</span></dt>
+<dd style="margin: 0"><span class="t-es">Dublín, Irlanda · Abierto a proyectos en cualquier país</span><span class="t-en">Dublin, Ireland · Open to projects in any country</span></dd>
+<dt style="font-family: 'IBM Plex Mono', monospace; font-size: clamp(12px, 1.8vh, 15px); color: #B4BDD0"><span class="t-es">Contacto</span><span class="t-en">Contact</span></dt>
+<dd style="margin: 0">chrisvl23@icloud.com</dd>
+</dl>
+<div class="bio-cta" style="margin-top: clamp(12px, 2.6vh, 28px); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px">
+<button type="button" class="btn-primary" onclick="{{ goContents }}" style="min-height: clamp(40px, 5.4vh, 48px); padding: 0 32px; cursor: pointer; background: none; color: #CCC9DC; font-family: 'IBM Plex Mono', monospace; font-size: clamp(13px, 1.9vh, 16px); border: 1px solid #CCC9DC; white-space: nowrap"><span class="t-es">Ver proyectos →</span><span class="t-en">View projects →</span></button>
+<a href="{{ cvHref }}" download="{{ cvName }}" class="link-cv" style="display: inline-flex; align-items: center; min-height: 40px; font-family: 'IBM Plex Mono', monospace; font-size: clamp(12.5px, 1.8vh, 14px); color: #9AA3B5; text-decoration: underline; text-underline-offset: 4px"><span class="t-es">Descargar CV</span><span class="t-en">Download CV</span></a>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isContents }}" hint-placeholder-val="{{ false }}">
+<section style="animation: fadeIn 0.6s ease both">
+<div class="title-wrap" style="overflow: hidden; transition: height 0.7s ease, opacity 0.5s ease; {{ titleLook }}">
+<h2 class="proj-title" style="margin: 36px 0 0; display: block; width: fit-content; font-size: 52px; line-height: 1.2; font-weight: 300; letter-spacing: 0.4em; background: linear-gradient(transparent calc(100% - 3px), {{accent}} calc(100% - 3px))"><span class="t-es">PROYECTOS</span><span class="t-en">PROJECTS</span></h2>
+</div>
+
+<div class="strips-box" style="position: relative; transition: height 0.7s ease, margin-top 0.7s ease; {{ boxLook }}">
+<div class="strips-row" style="display: flex; height: 100%; {{ stripsLook }}">
+<sc-for list="{{ items }}" as="p" hint-placeholder-count="4">
+<button type="button" class="strip" onclick="{{ p.open }}" aria-label="{{ p.aria }}" style="display: flex; flex-direction: column; min-width: 0; padding: 0; border: 0; background: none; cursor: pointer; overflow: hidden; font-family: inherit; color: inherit; text-align: center; transition: flex-grow 0.7s ease, margin-left 0.7s ease, opacity 0.5s ease; {{ p.look }}">
+<span class="strip-img" style="display: block; position: relative; flex: 1; min-height: 0; overflow: hidden; {{ p.img }}">
+<span style="position: absolute; top: 24px; left: 0; right: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA3B5">{{ p.imgLabel }}</span>
+<sc-if value="{{ p.is3 }}"><picture><source media="(max-width:820px),(max-height:520px),(max-width:1100px) and (orientation:portrait)" srcset="img/casa-guayabo/render-1-1200.webp 1200w, img/casa-guayabo/render-1.webp 1800w" sizes="(min-width: 600px) 50vw, 100vw"><img src="img/casa-guayabo/tira.webp" alt="{{ p.imgAlt }}" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%"></picture><img class="strip-photo" src="img/casa-guayabo/tira-duotono.webp" alt="{{ p.imgAlt }}" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; opacity: 1"></sc-if>
+<sc-if value="{{ p.is2 }}"><picture><source media="(max-width:820px),(max-height:520px),(max-width:1100px) and (orientation:portrait)" srcset="img/casa-arroyo/render-1-1200.webp 1200w, img/casa-arroyo/render-1.webp 1440w" sizes="(min-width: 600px) 50vw, 100vw"><img src="img/casa-arroyo/tira.webp" alt="{{ p.imgAlt }}" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%"></picture><img class="strip-photo" src="img/casa-arroyo/tira-duotono.webp" alt="{{ p.imgAlt }}" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; opacity: 1"></sc-if>
+<sc-if value="{{ p.is1 }}"><picture><source media="(max-width:820px),(max-height:520px),(max-width:1100px) and (orientation:portrait)" srcset="img/casa-mabel/render-1-1200.webp 1200w, img/casa-mabel/render-1.webp 1800w" sizes="(min-width: 600px) 50vw, 100vw"><img src="img/casa-mabel/tira.webp" alt="{{ p.imgAlt }}" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%"></picture><img class="strip-photo" src="img/casa-mabel/tira-duotono.webp" alt="{{ p.imgAlt }}" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; opacity: 1"></sc-if>
+<sc-if value="{{ p.is0 }}"><picture><source media="(max-width:820px),(max-height:520px),(max-width:1100px) and (orientation:portrait)" srcset="img/teatro-san-miguel/render-1-1200.webp 1200w, img/teatro-san-miguel/render-1.webp 1599w" sizes="(min-width: 600px) 50vw, 100vw"><img src="img/teatro-san-miguel/tira.webp" alt="{{ p.imgAlt }}" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%"></picture><img class="strip-photo" src="img/teatro-san-miguel/tira-duotono.webp" alt="{{ p.imgAlt }}" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; opacity: 1"></sc-if>
+<sc-if value="{{ p.hasQuote }}"><span class="strip-quote" style="position: absolute; left: 0; right: 0; bottom: 0; padding: 48px 20px 20px; white-space: normal; font-size: 15px; line-height: 1.4; color: #CCC9DC; background: linear-gradient(transparent, rgba(12,24,33,0.9))">{{ p.quote }}</span></sc-if>
+<span class="strip-num" style="position: absolute; right: 4px; bottom: -52px; font-size: 260px; line-height: 1; font-weight: 700; letter-spacing: -0.06em; color: #0C1821">{{ p.n }}</span>
+</span>
+<span class="strip-txt" style="display: block; flex: none; height: 150px; padding-top: 18px; white-space: nowrap">
+<span class="pict" style="display: flex; align-items: center; justify-content: center; height: 30px; margin-bottom: 10px; color: {{ p.accent }}"><sc-if value="{{ p.is0 }}"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="5" width="28" height="7" fill="#C2665F"></rect><polygon points="5,11 9,11 27,29 23,29" fill="#C2665F"></polygon><polygon points="23,11 27,11 9,29 5,29" fill="#C2665F"></polygon></svg></sc-if><sc-if value="{{ p.is1 }}"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><defs><mask id="casa-mabel-roof"><rect width="32" height="32" fill="#fff"></rect><path d="M2 7 L11 16 L21 16 L30 7 M2 25 L11 16 M21 16 L30 25" stroke="#000" stroke-width="1.8" fill="none"></path></mask></defs><rect x="2" y="7" width="28" height="18" fill="#C9A57B" mask="url(#casa-mabel-roof)"></rect></svg></sc-if><sc-if value="{{ p.is2 }}"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><defs><mask id="casa-arroyo-tower"><rect width="32" height="32" fill="#fff"></rect><path d="M0 14 H32 M0 19.5 H32 M0 25 H32" stroke="#000" stroke-width="1.2"></path></mask></defs><g fill="#9AAFC4"><polygon points="4,4 28,4 24,8.5 8,8.5"></polygon><g mask="url(#casa-arroyo-tower)"><rect x="8" y="8.5" width="5" height="20.5"></rect><rect x="19" y="8.5" width="5" height="20.5"></rect></g></g></svg></sc-if><sc-if value="{{ p.is3 }}"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><g fill="#9DB89A"><rect x="2" y="6" width="17" height="5"></rect><rect x="8" y="13.5" width="17" height="5"></rect><rect x="14" y="21" width="16" height="5"></rect></g></svg></sc-if></span>
+<span class="strip-title" style="display: block; font-size: 20px; font-weight: 500">{{ p.title }}</span>
+<span style="display: block; font-size: 14px; color: #9AA3B5">{{ p.sub1 }}</span>
+<span style="display: block; font-size: 14px; color: #9AA3B5">{{ p.sub2 }}</span>
+<span class="strip-quote-m">{{ p.quote }}</span>
+</span>
+</button>
+</sc-for>
+</div>
+
+<div class="proj-overlay" style="position: absolute; inset: -2px; background: #0C1821; outline: 0; border: 0; box-shadow: none; display: flex; flex-direction: column; transition: opacity 0.6s ease; {{ detailLook }}">
+<div style="position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: #0C1821; pointer-events: none; {{ splashLook }}"><img data-bind-src="{{ splashPic }}" data-sizes="100vw" alt="{{ splashAlt }}" style="display: block; width: 100%; max-height: 100%; aspect-ratio: 2.39 / 1; object-fit: cover; object-position: 50% 50%; {{ splashScale }}"></div>
+<div class="proj-content" style="flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; {{ contentLook }}">
+<div class="proj-grid" style="flex: 1 1 0; min-height: 0; display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px">
+<div class="proj-left" style="display: flex; flex-direction: column; gap: 12px; min-height: 0">
+<sc-if value="{{ isPlanView }}" hint-placeholder-val="{{ false }}"><div class="tap-hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M10 2h4v4M14 2L9.5 6.5M6 14H2v-4M2 14l4.5-4.5"></path></svg><span class="t-es">Toca para ampliar</span><span class="t-en">Tap to enlarge</span></div></sc-if>
+<div class="viewer-wrap" style="flex: 1; min-height: 0; container-type: size; display: flex; align-items: center; justify-content: center">
+<div class="viewer {{ viewerCls }}" style="position: relative; flex: none; width: min(100cqw, 150cqh); aspect-ratio: 3 / 2; overflow: hidden; background: #0C1821">
+<sc-if value="{{ noImg }}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; inset: 0; background: repeating-linear-gradient(45deg, #1B2A41, #1B2A41 10px, #142234 10px, #142234 20px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 16px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">[{{ view.label }}]</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA3B5">{{ view.hint }}</div>
+</div>
+</sc-if>
+<img data-bind-src="{{ shotSrc0 }}" data-sizes="(max-width: 820px) 100vw, 50vw" alt="{{ shotAlt0 }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transition: opacity 0.3s ease; {{ shotLook0 }}">
+<img data-bind-src="{{ shotSrc1 }}" data-sizes="(max-width: 820px) 100vw, 50vw" alt="{{ shotAlt1 }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transition: opacity 0.3s ease; {{ shotLook1 }}">
+<img data-bind-src="{{ shotSrc2 }}" data-sizes="(max-width: 820px) 100vw, 50vw" alt="{{ shotAlt2 }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transition: opacity 0.3s ease; {{ shotLook2 }}">
+<img data-bind-src="{{ shotSrc3 }}" data-sizes="(max-width: 820px) 100vw, 50vw" alt="{{ shotAlt3 }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transition: opacity 0.3s ease; {{ shotLook3 }}">
+<img data-bind-src="{{ shotSrc4 }}" data-sizes="(max-width: 820px) 100vw, 50vw" alt="{{ shotAlt4 }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transition: opacity 0.3s ease; {{ shotLook4 }}">
+<img data-bind-src="{{ shotSrc5 }}" data-sizes="(max-width: 820px) 100vw, 50vw" alt="{{ shotAlt5 }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transition: opacity 0.3s ease; {{ shotLook5 }}">
+<sc-if value="{{ canExpand }}" hint-placeholder-val="{{ true }}">
+<button type="button" class="v-expand" aria-label="{{ expandLabel }}" title="{{ expandLabel }}" style="--acc: {{ cur.accent }}; position: absolute; top: 8px; right: 8px; z-index: 3; width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; background: rgba(12,24,33,0.62); border: 1px solid rgba(204,201,220,0.35); color: #CCC9DC"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M10 2h4v4M14 2L9.5 6.5M6 14H2v-4M2 14l4.5-4.5"></path></svg></button>
+</sc-if>
+<sc-if value="{{ hasGallery }}" hint-placeholder-val="{{ false }}">
+<button type="button" class="v-arrow" onclick="{{ shotPrev }}" aria-label="Render anterior / Previous render" style="left: 8px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 0; background: rgba(12,24,33,0.62); color: #CCC9DC; font-size: 26px; line-height: 1; font-family: 'IBM Plex Mono', monospace">‹</button>
+<button type="button" class="v-arrow" onclick="{{ shotNext }}" aria-label="Render siguiente / Next render" style="right: 8px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 0; background: rgba(12,24,33,0.62); color: #CCC9DC; font-size: 26px; line-height: 1; font-family: 'IBM Plex Mono', monospace">›</button>
+<div style="position: absolute; right: 10px; bottom: 10px; z-index: 2; display: flex; gap: 6px">
+<button type="button" class="v-thumb" onclick="{{ pickShot0 }}" aria-label="Render 1" aria-pressed="{{ thumbOn0 }}" style="width: 60px; aspect-ratio: 3 / 2; padding: 0; cursor: pointer; background: #0C1821; overflow: hidden; {{ thumbLook0 }}"><img data-bind-src="{{ shotSrc0 }}" data-sizes="60px" loading="lazy" alt="{{ shotAlt0 }}" style="display: block; width: 100%; height: 100%; object-fit: cover"></button>
+<button type="button" class="v-thumb" onclick="{{ pickShot1 }}" aria-label="Render 2" aria-pressed="{{ thumbOn1 }}" style="width: 60px; aspect-ratio: 3 / 2; padding: 0; cursor: pointer; background: #0C1821; overflow: hidden; {{ thumbLook1 }}"><img data-bind-src="{{ shotSrc1 }}" data-sizes="60px" loading="lazy" alt="{{ shotAlt1 }}" style="display: block; width: 100%; height: 100%; object-fit: cover"></button>
+<button type="button" class="v-thumb" onclick="{{ pickShot2 }}" aria-label="Render 3" aria-pressed="{{ thumbOn2 }}" style="width: 60px; aspect-ratio: 3 / 2; padding: 0; cursor: pointer; background: #0C1821; overflow: hidden; {{ thumbLook2 }}"><img data-bind-src="{{ shotSrc2 }}" data-sizes="60px" loading="lazy" alt="{{ shotAlt2 }}" style="display: block; width: 100%; height: 100%; object-fit: cover"></button>
+<button type="button" class="v-thumb" onclick="{{ pickShot3 }}" aria-label="Render 4" aria-pressed="{{ thumbOn3 }}" style="width: 60px; aspect-ratio: 3 / 2; padding: 0; cursor: pointer; background: #0C1821; overflow: hidden; {{ thumbLook3 }}"><img data-bind-src="{{ shotSrc3 }}" data-sizes="60px" loading="lazy" alt="{{ shotAlt3 }}" style="display: block; width: 100%; height: 100%; object-fit: cover"></button>
+<button type="button" class="v-thumb" onclick="{{ pickShot4 }}" aria-label="Render 5" aria-pressed="{{ thumbOn4 }}" style="width: 60px; aspect-ratio: 3 / 2; padding: 0; cursor: pointer; background: #0C1821; overflow: hidden; {{ thumbLook4 }}"><img data-bind-src="{{ shotSrc4 }}" data-sizes="60px" loading="lazy" alt="{{ shotAlt4 }}" style="display: block; width: 100%; height: 100%; object-fit: cover"></button>
+<button type="button" class="v-thumb" onclick="{{ pickShot5 }}" aria-label="Render 6" aria-pressed="{{ thumbOn5 }}" style="width: 60px; aspect-ratio: 3 / 2; padding: 0; cursor: pointer; background: #0C1821; overflow: hidden; {{ thumbLook5 }}"><img data-bind-src="{{ shotSrc5 }}" data-sizes="60px" loading="lazy" alt="{{ shotAlt5 }}" style="display: block; width: 100%; height: 100%; object-fit: cover"></button>
+</div>
+</sc-if>
+</div>
+</div>
+<sc-if value="{{ showTabs }}" hint-placeholder-val="{{ true }}">
+<div class="tabs-row" role="group" aria-label="{{ tabsLabel }}" style="display: grid; {{ tabsGrid }} gap: 8px">
+<sc-for list="{{ views }}" as="v" hint-placeholder-count="3">
+<button type="button" onclick="{{ v.pick }}" aria-pressed="{{ v.pressed }}" style="min-height: 52px; padding: 8px 4px; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.3; {{ v.look }}">{{ v.short }}</button>
+</sc-for>
+</div>
+</sc-if>
+<div class="proj-info" style="flex: none; height: 144px; padding-top: 4px; overflow: hidden">
+<sc-if value="{{ show.p0v0 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C2665F; text-transform: uppercase; letter-spacing: 0.08em">Render</div>
+<div style="margin-top: 2px; font-size: 16px; font-weight: 500; color: #CCC9DC"><span class="t-es">Una plaza bajo el edificio</span><span class="t-en">A plaza beneath the building</span></div>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5"><span class="t-es">Al elevar el edificio, la planta baja se convierte en una plaza cubierta abierta a todos. De noche, el volumen de vidrio se ilumina y deja ver la actividad del interior, invitando a entrar.</span><span class="t-en">By lifting the building, the ground floor becomes a covered plaza open to everyone. At night, the glass volume lights up and reveals the activity inside, inviting people in.</span></p>
+</div>
+</sc-if>
+<sc-if value="{{ show.p0v1 }}" hint-placeholder-val="{{ false }}">
+<div class="plan-info" style="height: 100%; display: flex; flex-direction: column; gap: 6px">
+<div style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.5; color: #C2665F; text-transform: uppercase; letter-spacing: 0.08em"><span class="t-es">Cuatro niveles, un recorrido de la ciudad al escenario</span><span class="t-en">Four levels, a journey from the street to the stage</span></div>
+<div class="plan-body" style="flex: 1; min-height: 0; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start">
+<div class="lvl-wrap" role="group" aria-label="Nivel / Level" style="display: flex; gap: 12px">
+<div class="lvl-sel" style="display: flex; flex-direction: column; gap: 4px">
+<button type="button" class="lvl-btn" onclick="{{ pickShot0 }}" aria-pressed="{{ thumbOn0 }}" aria-label="01" style="width: 46px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook0 }}">01</button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot1 }}" aria-pressed="{{ thumbOn1 }}" aria-label="00" style="width: 46px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook1 }}">00</button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot2 }}" aria-pressed="{{ thumbOn2 }}" aria-label="−01" style="width: 46px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook2 }}">−01</button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot3 }}" aria-pressed="{{ thumbOn3 }}" aria-label="−02" style="width: 46px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook3 }}">−02</button>
+</div>
+<div class="lvl-sec" style="display: flex; flex-direction: column; gap: 4px; padding-left: 12px; border-left: 1px solid #324A5F">
+<button type="button" class="lvl-btn" onclick="{{ pickShot4 }}" aria-pressed="{{ thumbOn4 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook4 }}"><span class="t-es">Sección A</span><span class="t-en">Section A</span></button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot5 }}" aria-pressed="{{ thumbOn5 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook5 }}"><span class="t-es">Sección B</span><span class="t-en">Section B</span></button>
+</div>
+</div>
+<div style="display: grid; min-width: 0">
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt0 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle0 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText0 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt1 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle1 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText1 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt2 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle2 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText2 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt3 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle3 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText3 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt4 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle4 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText4 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt5 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle5 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText5 }}</p></div>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ show.p0v2 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C2665F; text-transform: uppercase; letter-spacing: 0.08em"><span class="t-es">Modelo BIM</span><span class="t-en">BIM model</span></div>
+<div style="margin-top: 2px; font-size: 16px; font-weight: 500; color: #CCC9DC"><span class="t-es">Del modelo a los planos</span><span class="t-en">From model to drawings</span></div>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5"><span class="t-es">Modelé el edificio completo en Revit y generé desde el modelo todas las plantas y secciones del proyecto. Los elementos más exigentes fueron la celosía perforada de la fachada y las columnas inclinadas de la estructura en X, que necesitaron un modelado cuidadoso para controlar su geometría con precisión.</span><span class="t-en">I modelled the entire building in Revit and produced all the project's plans and sections directly from the model. The most demanding elements were the perforated façade screen and the inclined columns of the X-shaped structure, which required careful modelling to control their geometry precisely.</span></p>
+</div>
+</sc-if>
+<sc-if value="{{ show.p1v0 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A57B; text-transform: uppercase; letter-spacing: 0.08em">Render</div>
+<div style="margin-top: 2px; font-size: 16px; font-weight: 500; color: #CCC9DC"><span class="t-es">Lo nuevo, con el carácter de siempre</span><span class="t-en">The new, with the same old character</span></div>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5"><span class="t-es">Teja de barro, muros de piedra, celosías y corredores con columnas blancas: la ampliación habla el mismo idioma que la casa original. Al ser una casa de campo, los espacios se abren al jardín y a la sombra de los árboles.</span><span class="t-en">Clay tiles, stone walls, breeze blocks and corridors with white columns: the extension speaks the same language as the original house. As a country home, its spaces open onto the garden and the shade of the trees.</span></p>
+</div>
+</sc-if>
+<sc-if value="{{ show.p1v1 }}" hint-placeholder-val="{{ false }}">
+<div class="plan-info" style="height: 100%; display: flex; flex-direction: column; gap: 6px">
+<div style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.5; color: #C9A57B; text-transform: uppercase; letter-spacing: 0.08em"><span class="t-es">Una casa que crece alrededor de su jardín</span><span class="t-en">A house that grows around its garden</span></div>
+<div class="plan-body" style="flex: 1; min-height: 0; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start">
+<div class="lvl-wrap" role="group" aria-label="Plano / Drawing" style="display: flex; flex-direction: column; gap: 6px">
+<div class="lvl-sel" style="display: flex; flex-direction: column; gap: 4px">
+<button type="button" class="lvl-btn" onclick="{{ pickShot0 }}" aria-pressed="{{ thumbOn0 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook0 }}"><span class="t-es">Planta</span><span class="t-en">Plan</span></button>
+</div>
+<div class="lvl-sec" style="display: flex; flex-direction: column; gap: 4px; padding-top: 6px; border-top: 1px solid #324A5F">
+<button type="button" class="lvl-btn" onclick="{{ pickShot1 }}" aria-pressed="{{ thumbOn1 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook1 }}"><span class="t-es">Sección A</span><span class="t-en">Section A</span></button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot2 }}" aria-pressed="{{ thumbOn2 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook2 }}"><span class="t-es">Sección B</span><span class="t-en">Section B</span></button>
+</div>
+</div>
+<div style="display: grid; min-width: 0">
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt0 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle0 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText0 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt1 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle1 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText1 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt2 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle2 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText2 }}</p></div>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ show.p1v2 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A57B; text-transform: uppercase; letter-spacing: 0.08em"><span class="t-es">Modelo BIM</span><span class="t-en">BIM model</span></div>
+<div style="margin-top: 2px; font-size: 16px; font-weight: 500; color: #CCC9DC"><span class="t-es">Cuidar lo que ya existe</span><span class="t-en">Caring for what already exists</span></div>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5"><span class="t-es">Modelé en Revit la casa existente y la ampliación por separado, para tener siempre claro qué muros de adobe se conservaban y dónde se intervenía. También diseñé y modelé todo el sistema hidráulico: suministro de agua, cisterna, aguas negras, aguas lluvias y fosa séptica. Desde el modelo generé el juego completo de planos arquitectónicos.</span><span class="t-en">I modelled the existing house and the extension separately in Revit, so it was always clear which adobe walls were being kept and where the work would take place. I also designed and modelled the full plumbing system: water supply, cistern, foul water, rainwater drainage and septic tank. The complete set of architectural drawings was produced directly from the model.</span></p>
+</div>
+</sc-if>
+<sc-if value="{{ show.p2v0 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AAFC4; text-transform: uppercase; letter-spacing: 0.08em">Render</div>
+<div style="margin-top: 2px; font-size: 16px; font-weight: 500; color: #CCC9DC"><span class="t-es">Una entrada que se anuncia</span><span class="t-en">An entrance that announces itself</span></div>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5"><span class="t-es">La torre de acceso, revestida de piedra y enmarcada por pilastras blancas bajo un remate volado, marca la entrada y ordena toda la fachada. Las lamas negras del cerramiento dan privacidad sin cerrar la casa a la calle, frente al antiguo arroyo que le da nombre.</span><span class="t-en">The stone-clad entrance tower, framed by white pilasters beneath a projecting canopy, marks the entrance and organises the whole façade. The black slatted boundary gives privacy without closing the house off from the street, facing the old stream that gives it its name.</span></p>
+</div>
+</sc-if>
+<sc-if value="{{ show.p2v1 }}" hint-placeholder-val="{{ false }}">
+<div class="plan-info" style="height: 100%; display: flex; flex-direction: column; gap: 6px">
+<div style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.5; color: #9AAFC4; text-transform: uppercase; letter-spacing: 0.08em"><span class="t-es">Una casa para todas las generaciones</span><span class="t-en">A home for every generation</span></div>
+<div class="plan-body" style="flex: 1; min-height: 0; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start">
+<div class="lvl-wrap ar" role="group" aria-label="Plano / Drawing" style="display: flex; gap: 12px">
+<div class="lvl-sel" style="display: flex; flex-direction: column; gap: 4px">
+<button type="button" class="lvl-btn" onclick="{{ pickShot0 }}" aria-pressed="{{ thumbOn0 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook0 }}"><span class="t-es">Planta alta</span><span class="t-en">First floor</span></button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot1 }}" aria-pressed="{{ thumbOn1 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook1 }}"><span class="t-es">Planta baja</span><span class="t-en">Ground floor</span></button>
+</div>
+<div class="lvl-sec" style="display: flex; flex-direction: column; gap: 4px; padding-left: 12px; border-left: 1px solid #324A5F">
+<button type="button" class="lvl-btn" onclick="{{ pickShot2 }}" aria-pressed="{{ thumbOn2 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook2 }}"><span class="t-es">Sección A</span><span class="t-en">Section A</span></button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot3 }}" aria-pressed="{{ thumbOn3 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook3 }}"><span class="t-es">Sección B</span><span class="t-en">Section B</span></button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot4 }}" aria-pressed="{{ thumbOn4 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook4 }}"><span class="t-es">Sección C</span><span class="t-en">Section C</span></button>
+</div>
+</div>
+<div style="display: grid; min-width: 0">
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt0 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle0 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText0 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt1 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle1 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText1 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt2 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle2 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText2 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt3 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle3 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText3 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt4 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle4 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText4 }}</p></div>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ show.p2v2 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AAFC4; text-transform: uppercase; letter-spacing: 0.08em"><span class="t-es">Modelo BIM</span><span class="t-en">BIM model</span></div>
+<div style="margin-top: 2px; font-size: 16px; font-weight: 500; color: #CCC9DC"><span class="t-es">Un modelo para decidir con el cliente</span><span class="t-en">A model for deciding with the client</span></div>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5"><span class="t-es">Modelé la casa completa en Revit y usé el modelo en las reuniones con los clientes para mostrarles el diseño en 3D y aplicar sus cambios con rapidez. Desde el mismo modelo generé el juego completo de planos arquitectónicos y el sistema hidráulico de la vivienda.</span><span class="t-en">I modelled the whole house in Revit and used the model in meetings with the clients to show them the design in 3D and apply their changes quickly. From the same model I produced the complete set of architectural drawings and the house's plumbing system.</span></p>
+</div>
+</sc-if>
+<sc-if value="{{ show.p3v0 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9DB89A; text-transform: uppercase; letter-spacing: 0.08em">Render</div>
+<div style="margin-top: 2px; font-size: 16px; font-weight: 500; color: #CCC9DC"><span class="t-es">Entre árboles y terrazas</span><span class="t-en">Among trees and terraces</span></div>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5"><span class="t-es">Una base de piedra ancla la casa al terreno, y sobre ella las losas de concreto y los grandes ventanales abren los espacios al jardín. Las piscinas y la terraza exterior, con zona de descanso y asador, prolongan la vida de la casa hacia el paisaje.</span><span class="t-en">A stone base anchors the house to the ground, while above it the concrete slabs and large windows open the spaces to the garden. The pools and the outdoor terrace, with a lounge and barbecue area, extend daily life out into the landscape.</span></p>
+</div>
+</sc-if>
+<sc-if value="{{ show.p3v1 }}" hint-placeholder-val="{{ false }}">
+<div class="plan-info" style="height: 100%; display: flex; flex-direction: column; gap: 6px">
+<div style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.5; color: #9DB89A; text-transform: uppercase; letter-spacing: 0.08em"><span class="t-es">Una casa en terrazas entre los árboles</span><span class="t-en">A terraced house among the trees</span></div>
+<div class="plan-body" style="flex: 1; min-height: 0; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start">
+<div class="lvl-wrap" role="group" aria-label="Plano / Drawing" style="display: flex; gap: 12px">
+<div class="lvl-sel" style="display: flex; flex-direction: column; gap: 4px">
+<button type="button" class="lvl-btn" onclick="{{ pickShot0 }}" aria-pressed="{{ thumbOn0 }}" aria-label="01" style="width: 46px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook0 }}">01</button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot1 }}" aria-pressed="{{ thumbOn1 }}" aria-label="00" style="width: 46px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook1 }}">00</button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot2 }}" aria-pressed="{{ thumbOn2 }}" aria-label="−01" style="width: 46px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook2 }}">−01</button>
+</div>
+<div class="lvl-sec" style="display: flex; flex-direction: column; gap: 4px; padding-left: 12px; border-left: 1px solid #324A5F">
+<button type="button" class="lvl-btn" onclick="{{ pickShot3 }}" aria-pressed="{{ thumbOn3 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook3 }}"><span class="t-es">Sección A</span><span class="t-en">Section A</span></button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot4 }}" aria-pressed="{{ thumbOn4 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook4 }}"><span class="t-es">Sección B</span><span class="t-en">Section B</span></button>
+<button type="button" class="lvl-btn" onclick="{{ pickShot5 }}" aria-pressed="{{ thumbOn5 }}" style="width: 84px; height: 26px; padding: 0; cursor: pointer; background: #0C1821; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1; {{ lvlLook5 }}"><span class="t-es">Sección C</span><span class="t-en">Section C</span></button>
+</div>
+</div>
+<div style="display: grid; min-width: 0">
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt0 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle0 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText0 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt1 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle1 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText1 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt2 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle2 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText2 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt3 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle3 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText3 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt4 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle4 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText4 }}</p></div>
+<div style="grid-area: 1 / 1; min-width: 0; transition: opacity 0.3s ease, visibility 0s linear; {{ lvlTxt5 }}"><div style="font-size: 16px; font-weight: 500; line-height: 1.35; color: #CCC9DC">{{ lvlTitle5 }}</div><p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5">{{ lvlText5 }}</p></div>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ show.p3v2 }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9DB89A; text-transform: uppercase; letter-spacing: 0.08em"><span class="t-es">Modelo BIM</span><span class="t-en">BIM model</span></div>
+<div style="margin-top: 2px; font-size: 16px; font-weight: 500; color: #CCC9DC"><span class="t-es">Modelar la pendiente</span><span class="t-en">Modelling the slope</span></div>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #9AA3B5"><span class="t-es">Modelé en Revit el terreno con su desnivel y, sobre él, cada una de las terrazas de la casa, lo que permitió controlar las alturas, los muros de contención y los accesos entre niveles. Desde el modelo generé el juego completo de planos arquitectónicos y el sistema hidráulico de la vivienda.</span><span class="t-en">I modelled the sloping site in Revit and, on top of it, each of the house's terraces, which made it possible to control levels, retaining walls and access between floors. From the model I produced the complete set of architectural drawings and the house's plumbing system.</span></p>
+</div>
+</sc-if>
+</div>
+</div>
+<div class="proj-right" style="display: flex; flex-direction: column; min-height: 0">
+<div style="margin-top: 28px; display: flex; align-items: flex-end; gap: 20px; color: {{ cur.accent }}"><span class="pict" style="display: block; width: 56px; height: 56px"><sc-if value="{{ cur.is0 }}"><svg width="56" height="56" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="5" width="28" height="7" fill="#C2665F"></rect><polygon points="5,11 9,11 27,29 23,29" fill="#C2665F"></polygon><polygon points="23,11 27,11 9,29 5,29" fill="#C2665F"></polygon></svg></sc-if><sc-if value="{{ cur.is1 }}"><svg width="56" height="56" viewBox="0 0 32 32" aria-hidden="true"><defs><mask id="casa-mabel-roof-d"><rect width="32" height="32" fill="#fff"></rect><path d="M2 7 L11 16 L21 16 L30 7 M2 25 L11 16 M21 16 L30 25" stroke="#000" stroke-width="1.8" fill="none"></path></mask></defs><rect x="2" y="7" width="28" height="18" fill="#C9A57B" mask="url(#casa-mabel-roof-d)"></rect></svg></sc-if><sc-if value="{{ cur.is2 }}"><svg width="56" height="56" viewBox="0 0 32 32" aria-hidden="true"><defs><mask id="casa-arroyo-tower-d"><rect width="32" height="32" fill="#fff"></rect><path d="M0 14 H32 M0 19.5 H32 M0 25 H32" stroke="#000" stroke-width="1.2"></path></mask></defs><g fill="#9AAFC4"><polygon points="4,4 28,4 24,8.5 8,8.5"></polygon><g mask="url(#casa-arroyo-tower-d)"><rect x="8" y="8.5" width="5" height="20.5"></rect><rect x="19" y="8.5" width="5" height="20.5"></rect></g></g></svg></sc-if><sc-if value="{{ cur.is3 }}"><svg width="56" height="56" viewBox="0 0 32 32" aria-hidden="true"><g fill="#9DB89A"><rect x="2" y="6" width="17" height="5"></rect><rect x="8" y="13.5" width="17" height="5"></rect><rect x="14" y="21" width="16" height="5"></rect></g></svg></sc-if></span><span style="font-size: 72px; line-height: 0.8; font-weight: 700; letter-spacing: -0.04em">{{ cur.num }}</span></div>
+<h3 class="proj-h3" style="margin: 16px 0 4px; font-size: 38px; line-height: 1.1; font-weight: 500; letter-spacing: -0.02em">{{ cur.title }}</h3>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{ cur.accent }}">{{ cur.info }}</div>
+<dl class="proj-dl" style="margin: 24px 0 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 28px; font-size: clamp(13px, 2vh, 16px)">
+<dt style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA3B5"><span class="t-es">Rol</span><span class="t-en">Role</span></dt>
+<dd style="margin: 0">{{ cur.role }}</dd>
+<dt style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA3B5"><span class="t-es">Equipo</span><span class="t-en">Team</span></dt>
+<dd style="margin: 0">{{ cur.team }}</dd>
+<dt style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA3B5">Software</dt>
+<dd style="margin: 0">{{ cur.software }}</dd>
+<dt style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA3B5"><span class="t-es">Programa</span><span class="t-en">Programme</span></dt>
+<dd style="margin: 0">{{ cur.program }}</dd>
+</dl>
+<p style="margin: 24px 0 0; font-size: clamp(14px, 2.1vh, 17px); color: #9AA3B5"><span style="color: #CCC9DC"><span class="t-es">Reto.</span><span class="t-en">Challenge.</span></span> {{ cur.challenge }}</p>
+</div>
+</div>
+<div class="proj-foot" style="flex: none; height: 44px; box-sizing: border-box; margin-top: 10px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; border-top: 1px solid #243952">
+<button type="button" class="foot-link" onclick="{{ goPrev }}" style="justify-self: start; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; line-height: 1.35; font-family: 'IBM Plex Mono', monospace;"><span class="foot-main" style="display: block; font-size: 13px; color: #9AA3B5"><span class="t-es">← Proyecto anterior</span><span class="t-en">← Previous project</span></span><span style="display: block; font-size: 11px; color: {{ prevAccent }}">{{ prevName }}</span></button>
+<button type="button" class="foot-link foot-mid" onclick="{{ openContact }}" style="justify-self: center; padding: 0; border: 0; background: none; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #CCC9DC; text-decoration: underline; text-underline-offset: 4px"><span class="t-es">¿Te interesa mi trabajo? Escríbeme</span><span class="t-en">Interested in my work? Get in touch</span></button>
+<button type="button" class="foot-link" onclick="{{ goNext }}" style="justify-self: end; padding: 0; border: 0; background: none; cursor: pointer; text-align: right; line-height: 1.35; font-family: 'IBM Plex Mono', monospace;"><span class="foot-main" style="display: block; font-size: 13px; color: #9AA3B5"><span class="t-es">Siguiente proyecto →</span><span class="t-en">Next project →</span></span><span style="display: block; font-size: 11px; color: {{ nextAccent }}">{{ nextName }}</span></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
+<div class="contact-wrap" onclick="{{ closeIfBackdrop }}" style="position: fixed; inset: 0; z-index: 50; display: flex; justify-content: flex-end; align-items: flex-start; padding: 96px 56px; box-sizing: border-box; background: rgba(12,24,33,0.72); animation: fadeIn 0.3s ease both">
+<div role="dialog" aria-modal="true" aria-labelledby="contact-title" style="width: 400px; max-width: 100%; box-sizing: border-box; padding: 28px; background: #1B2A41; border: 1px solid #324A5F; color: #CCC9DC">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px">
+<h2 id="contact-title" style="margin: 0; font-size: 32px; line-height: 1.1; font-weight: 500; letter-spacing: -0.02em"><span class="t-es">Hablemos</span><span class="t-en">Let&#39;s talk</span></h2>
+<button type="button" class="lang-btn c-close" onclick="{{ closeContact }}" aria-label="{{ closeLabel }}" style="min-width: 44px; min-height: 44px; margin: -10px -10px 0 0; padding: 0; border: 0; background: none; cursor: pointer; font-size: 24px; line-height: 1; color: #9AA3B5">&#215;</button>
+</div>
+<div style="margin-top: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8FA9C4; letter-spacing: 0.08em; text-transform: uppercase"><span class="t-es">Correo</span><span class="t-en">Email</span></div>
+<div class="c-mail" style="margin-top: 4px; font-size: 18px; word-break: break-all">chrisvl23@icloud.com</div>
+<div class="c-actions" style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" class="btn-primary" onclick="{{ copyEmail }}" style="min-height: 40px; padding: 0 20px; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 14px; white-space: nowrap; border: 1px solid #CCC9DC; background: none; color: #CCC9DC">{{ copyLabel }}</button>
+<a class="btn-primary" href="mailto:chrisvl23@icloud.com" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 40px; padding: 0 20px; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 14px; white-space: nowrap; border: 1px solid #CCC9DC; background: none; color: #CCC9DC; text-decoration: none"><span class="t-es">Escribir correo</span><span class="t-en">Send email</span></a>
+</div>
+<div style="margin-top: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8FA9C4; letter-spacing: 0.08em; text-transform: uppercase"><span class="t-es">Ubicación</span><span class="t-en">Location</span></div>
+<div style="margin-top: 4px; font-size: 16px; line-height: 1.4"><span class="t-es">Dublín, Irlanda · Abierto a proyectos en cualquier país</span><span class="t-en">Dublin, Ireland · Open to projects in any country</span></div>
+<a href="{{ cvHref }}" download="{{ cvName }}" class="link-cv" style="display: inline-flex; align-items: center; min-height: 40px; margin-top: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #9AA3B5; text-decoration: underline; text-underline-offset: 4px"><span class="t-es">Descargar CV</span><span class="t-en">Download CV</span></a>
+</div>
+</div>
+</sc-if>
+
+</div>
+</template>
+<script src="js/main.js"></script>
+</body>
+</html>
