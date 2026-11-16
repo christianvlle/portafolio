@@ -643,7 +643,7 @@ try { navigator.clipboard.writeText('chrisvl23@icloud.com').then(done, fallback)
 };
 const all = [
 { short: 'Render', label: t('IMAGEN PRINCIPAL', 'MAIN IMAGE'), hint: t('Render o foto de maqueta', 'Render or model photo') },
-{ short: ci === 0 ? t('Plantas', 'Floor plans') : ((ci === 1 || ci === 2 || ci === 3) ? t('Planos y secciones', 'Plans and sections') : t('Planta o sección', 'Plan or section')), label: t('PLANTA O SECCIÓN', 'PLAN OR SECTION'), hint: t('Un plano que explique cómo se organiza', 'A drawing that explains the layout') },
+{ short: ci === 0 ? t('Planos y secciones', 'Plans and sections') : ((ci === 1 || ci === 2 || ci === 3) ? t('Planos y secciones', 'Plans and sections') : t('Planta o sección', 'Plan or section')), label: t('PLANTA O SECCIÓN', 'PLAN OR SECTION'), hint: t('Un plano que explique cómo se organiza', 'A drawing that explains the layout') },
 { short: t('Modelo BIM', 'BIM model'), label: t('CAPTURA DEL MODELO BIM', 'BIM MODEL SCREENSHOT'), hint: t('Una vista del modelo', 'A view of the model') }
 ];
 const views = all.map((v, i) => ({
